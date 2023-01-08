@@ -19,8 +19,8 @@ if (window.DeviceOrientationEvent) {
       window.DeviceMotionEvent.requestPermission()
         .then((response) => {
           if (response == "granted") {
-            let body = document.querySelector("body");
-            body.style.background="blue";
+            let body = document.querySelector(".iphone");
+            body.innerHTML=navigator.userAgent;
           }
         })
         .catch(console.error);
@@ -28,8 +28,8 @@ if (window.DeviceOrientationEvent) {
       alert("DeviceMotionEvent is not defined");
     }
   } else {
-    let body = document.querySelector("body");
-    body.style.background="green";
+    let body = document.querySelector(".iphone");
+    body.innerHTML=navigator.userAgent;
   }
 })();
 
