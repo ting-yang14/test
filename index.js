@@ -29,7 +29,7 @@ if (window.DeviceOrientationEvent) {
     }
   } else {
     let body = document.querySelector(".iphone");
-    body.innerHTML=navigator.userAgent;
+    body.innerHTML=navigator.userAgent+"ffff";
   }
 })();
 
