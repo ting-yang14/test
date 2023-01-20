@@ -10,7 +10,8 @@ if (window.DeviceOrientationEvent) {
       "https:" +
       window.location.href.substring(window.location.protocol.length);
   }
-  if (isIosOrAndroid === 2) {
+  let phone = isIosOrAndroid()
+  if (phone === 2) {
     // 仅 ios 需要获取用户允许
     if (
       typeof window.DeviceMotionEvent !== "undefined" &&
