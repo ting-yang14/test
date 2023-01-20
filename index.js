@@ -37,17 +37,21 @@ if (window.DeviceOrientationEvent) {
 
 function isIosOrAndroid() {
   const u = navigator.userAgent;
+  console.log(u);
   const isAndroid = u.indexOf("Android") > -1 || u.indexOf("Adr") > -1; //android终端
   if (isAndroid) {
+    console.log("return 1");
     return 1;
   }
   // const isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
   const isiOS = u.includes("Mac")
-  console.log(isiOS)
+  console.log(isiOS);
   if (isiOS) {
+    console.log("return 2");
     return 2;
     
   }
+  console.log("return 0");
   return 0;
 }
 
