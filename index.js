@@ -20,7 +20,7 @@ if (window.DeviceOrientationEvent) {
         .then((response) => {
           if (response == "granted") {
             let body = document.querySelector(".iphone");
-            body.innerHTML=navigator.userAgent;
+            body.innerHTML=navigator.userAgent+"aaas";
           }
         })
         .catch(console.error);
