@@ -21,6 +21,7 @@ if (window.DeviceOrientationEvent) {
           if (response == "granted") {
             let body = document.querySelector(".iphone");
             body.innerHTML=navigator.userAgent+"aaas";
+            console.log("request");
           }
         })
         .catch(console.error);
@@ -30,6 +31,7 @@ if (window.DeviceOrientationEvent) {
   } else {
     let body = document.querySelector(".iphone");
     body.innerHTML=navigator.userAgent+"ffff";
+    console.log("request++++");
   }
 })();
 
