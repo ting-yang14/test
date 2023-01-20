@@ -43,8 +43,10 @@ function isIosOrAndroid() {
   }
   // const isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
   const isiOS = u.includes("Mac")
+  console.log(isiOS)
   if (isiOS) {
     return 2;
+    
   }
   return 0;
 }
