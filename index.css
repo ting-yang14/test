@@ -69,8 +69,8 @@ body::before {
   transform: rotateX(90deg) translateZ(90px);
 }
 
-.suoluo {
-  background-image: url(./suoluo.jpeg);
+.suolu {
+  background-image: url(./suolu.jpeg);
   background-size: cover;
   -webkit-transform: rotateY(0) translateZ(90px);
   transform: rotateY(0) translateZ(90px);
