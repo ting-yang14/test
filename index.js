@@ -22,8 +22,9 @@ function pageInit(device) {
     window.addEventListener("devicemotion", deviceMotionHandler);
   }
   if (device == "iPhone") {
-    const accessBtn = document.getElementById("getAccess");
-    accessBtn.style.display = "block";
+    // const accessBtn = document.getElementById("getAccess");
+    // accessBtn.style.display = "block";
+    getAccess();
   }
   if (device == "notMobile") {
     const data = document.querySelector(".data");
