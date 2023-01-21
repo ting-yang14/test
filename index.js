@@ -14,21 +14,23 @@ function showDevice(device) {
   const deviceDiv = document.getElementById("device");
   deviceDiv.innerHTML = device;
 }
+// const accessBtn = document.getElementById("getAccess");
 pageInit(device);
-async function pageInit(device) {
+function pageInit(device) {
   if (device == "Android") {
     window.addEventListener("deviceorientation", deviceOrientationHandler);
     window.addEventListener("devicemotion", deviceMotionHandler);
   }
   if (device == "iPhone") {
-    getAccess();
+    const accessBtn = document.getElementById("getAccess");
+    accessBtn.style.display = "block";
   }
   if (device == "notMobile") {
     const data = document.querySelector(".data");
     data.innerHTML = `<p>此裝置不支援動作訊號收取</p>`;
   }
 }
-async function getAccess() {
+function getAccess() {
   DeviceMotionEvent.requestPermission()
     .then((response) => {
       if (response == "granted") {

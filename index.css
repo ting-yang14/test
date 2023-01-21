@@ -11,6 +11,9 @@
   display: flex;
   justify-content: center;
 }
+#getAccess {
+  display: none;
+}
 #accData,
 #gyrData {
   text-align: center;
