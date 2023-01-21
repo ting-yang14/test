@@ -2,24 +2,28 @@
 <html lang="zh">
   <head>
     <meta charset="UTF-8" />
-    <title>onepiece-dice</title>
+    <title>access device motion and orientation</title>
     <meta
       name="viewport"
-      content="width=device-width,initial-scale=1,user-scaleble=no"
+      content="width=device-width,initial-scale=1,user-scalable=no"
     />
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <div id="show-info"></div>
-    <div id="container">
-      <div class="item suolu"></div>
-      <div class="item sanji"></div>
-      <div class="item nami"></div>
-      <div class="item jiaoba"></div>
-      <div class="item wusuopu"></div>
-      <div class="item robot"></div>
+    <div id="device"></div>
+    <div class="data">
+      <div id="accData">
+        <p>alpha:</p>
+        <p>alpha:</p>
+        <p>alpha:</p>
+      </div>
+      <div id="gyrData">
+        <p>x:</p>
+        <p>y:</p>
+        <p>z:</p>
+      </div>
     </div>
-    <div class="iphone"></div>
+
     <script src="./index.js"></script>
   </body>
 </html>
