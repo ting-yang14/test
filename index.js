@@ -21,14 +21,14 @@ async function pageInit(device) {
     window.addEventListener("devicemotion", deviceMotionHandler);
   }
   if (device == "iPhone") {
-    await getAccess();
+    getAccess();
   }
   if (device == "notMobile") {
     const data = document.querySelector(".data");
     data.innerHTML = `<p>此裝置不支援動作訊號收取</p>`;
   }
 }
-function getAccess() {
+async function getAccess() {
   DeviceMotionEvent.requestPermission()
     .then((response) => {
       if (response == "granted") {
