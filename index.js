@@ -21,25 +21,26 @@ function pageInit(device) {
     window.addEventListener("devicemotion", deviceMotionHandler);
   }
   if (device == "iPhone") {
-    DeviceMotionEvent.requestPermission()
-      .then((response) => {
-        if (response == "granted") {
-          window.addEventListener(
-            "deviceorientation",
-            deviceOrientationHandler
-          );
-          window.addEventListener("devicemotion", deviceMotionHandler);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    getAccess();
   }
   if (device == "notMobile") {
     const data = document.querySelector(".data");
     data.innerHTML = `<p>此裝置不支援動作訊號收取</p>`;
   }
 }
+function getAccess() {
+  DeviceMotionEvent.requestPermission()
+    .then((response) => {
+      if (response == "granted") {
+        window.addEventListener("deviceorientation", deviceOrientationHandler);
+        window.addEventListener("devicemotion", deviceMotionHandler);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 // if (window.DeviceOrientationEvent) {
 //   alert("裝置支援感測器擷取");
 // } else {
@@ -99,26 +100,28 @@ function pageInit(device) {
 // function $(id) {
 //   return document.getElementById(id);
 // }
+const gyrAlpha = document.getElementById("gyrAlpha");
+const gyrBeta = document.getElementById("gyrBeta");
+const gyrGamma = document.getElementById("gyrGamma");
 function deviceOrientationHandler(e) {
-  const gyrData = document.getElementById("gyrData");
   const roundAlpha = Math.round(e.alpha * 10000) / 10000;
   const roundBeta = Math.round(e.beta * 10000) / 10000;
   const roundGamma = Math.round(e.gamma * 10000) / 10000;
-  const pAlpha = `<p>gyr alpha: ${roundAlpha} deg</p>`;
-  const pBeta = `<p>gyr beta: ${roundBeta} deg</p>`;
-  const pGamma = `<p>gyr gamma: ${roundGamma} deg</p>`;
-  gyrData.innerHTML = pAlpha + pBeta + pGamma;
+  gyrAlpha.textContent = roundAlpha;
+  gyrBeta.textContent = roundBeta;
+  gyrGamma.textContent = roundGamma;
 }
+const accX = document.getElementById("accX");
+const accY = document.getElementById("accY");
+const accZ = document.getElementById("accZ");
 function deviceMotionHandler(e) {
-  const accData = document.getElementById("accData");
   const { x, y, z } = e.acceleration;
   const roundX = Math.round(x * 10000) / 10000;
   const roundY = Math.round(y * 10000) / 10000;
   const roundZ = Math.round(z * 10000) / 10000;
-  const pX = `<p>acc x: ${roundX} m/s<sup>2</sup></p>`;
-  const pY = `<p>acc y: ${roundY} m/s<sup>2</sup></p>`;
-  const pZ = `<p>acc z: ${roundZ} m/s<sup>2</sup></p>`;
-  accData.innerHTML = pX + pY + pZ;
+  accX.textContent = roundX;
+  accY.textContent = roundY;
+  accZ.textContent = roundZ;
 }
 // // 获得陀螺仪相关信息
 // function DeviceOrientationHandler(e) {
