@@ -15,13 +15,13 @@ function showDevice(device) {
   deviceDiv.innerHTML = device;
 }
 pageInit(device);
-function pageInit(device) {
+async function pageInit(device) {
   if (device == "Android") {
     window.addEventListener("deviceorientation", deviceOrientationHandler);
     window.addEventListener("devicemotion", deviceMotionHandler);
   }
   if (device == "iPhone") {
-    getAccess();
+    await getAccess();
   }
   if (device == "notMobile") {
     const data = document.querySelector(".data");
