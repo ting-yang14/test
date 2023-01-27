@@ -22,9 +22,9 @@ function pageInit(device) {
     window.addEventListener("devicemotion", deviceMotionHandler);
   }
   if (device == "iPhone") {
-    // const accessBtn = document.getElementById("getAccess");
-    // accessBtn.style.display = "block";
-    getAccess();
+    const accessBtn = document.getElementById("getAccess");
+    accessBtn.style.display = "block";
+    // getAccess();
   }
   if (device == "notMobile") {
     const data = document.querySelector(".data");
@@ -43,7 +43,43 @@ function getAccess() {
       console.log(err);
     });
 }
+const startRecordBtn = document.getElementById("startRecordBtn");
+startRecordBtn.addEventListener("click", startRecording);
+const stopRecordBtn = document.getElementById("stopRecordBtn");
+stopRecordBtn.addEventListener("click", stopRecording);
+let recordingInterval;
+let data = [];
+let record = {
+  startTime: null,
+  data: [],
+  endTime: null,
+};
+function startRecording() {
+  record.startTime = getCurrentISOTime();
+  if (!recordingInterval) {
+    recordingInterval = setInterval(function () {
+      data.push(mobileData);
+    }, 33.3);
+  }
+}
 
+function stopRecording() {
+  clearInterval(recordingInterval);
+  recordingInterval = null;
+  record.endTime = getCurrentISOTime();
+}
+
+function getCurrentISOTime() {
+  const now = new Date();
+  const nowISOString = now.toISOString();
+  return nowISOString;
+}
+const showRecordBtn = document.getElementById("showRecordBtn");
+showRecordBtn.addEventListener("click", showRecordedData);
+function showRecordedData() {
+  const recordedData = document.getElementById("recordedData");
+  recordedData.innerHTML = record;
+}
 // if (window.DeviceOrientationEvent) {
 //   alert("裝置支援感測器擷取");
 // } else {
@@ -103,16 +139,27 @@ function getAccess() {
 // function $(id) {
 //   return document.getElementById(id);
 // }
-const gyrAlpha = document.getElementById("gyrAlpha");
-const gyrBeta = document.getElementById("gyrBeta");
-const gyrGamma = document.getElementById("gyrGamma");
+let mobileData = {
+  acc_X: null,
+  acc_Y: null,
+  acc_Z: null,
+  ori_alpha: null,
+  ori_beta: null,
+  ori_gamma: null,
+};
+const oriAlpha = document.getElementById("oriAlpha");
+const oriBeta = document.getElementById("oriBeta");
+const oriGamma = document.getElementById("oriGamma");
 function deviceOrientationHandler(e) {
   const roundAlpha = Math.round(e.alpha * 10000) / 10000;
   const roundBeta = Math.round(e.beta * 10000) / 10000;
   const roundGamma = Math.round(e.gamma * 10000) / 10000;
-  gyrAlpha.textContent = roundAlpha;
-  gyrBeta.textContent = roundBeta;
-  gyrGamma.textContent = roundGamma;
+  mobileData.ori_alpha = roundAlpha;
+  mobileData.ori_beta = roundBeta;
+  mobileData.ori_gamma = roundGamma;
+  oriAlpha.textContent = roundAlpha;
+  oriBeta.textContent = roundBeta;
+  oriGamma.textContent = roundGamma;
 }
 const accX = document.getElementById("accX");
 const accY = document.getElementById("accY");
@@ -122,6 +169,9 @@ function deviceMotionHandler(e) {
   const roundX = Math.round(x * 10000) / 10000;
   const roundY = Math.round(y * 10000) / 10000;
   const roundZ = Math.round(z * 10000) / 10000;
+  mobileData.acc_X = roundX;
+  mobileData.acc_Y = roundY;
+  mobileData.acc_Z = roundZ;
   accX.textContent = roundX;
   accY.textContent = roundY;
   accZ.textContent = roundZ;
