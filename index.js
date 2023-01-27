@@ -85,8 +85,8 @@ function startRecording() {
 }
 
 function saveCurrentData() {
-  data = currentData;
-  currentData.time = Date.now();
+  const data = currentData;
+  data.time = Date.now();
   recordData.push(data);
 }
 function stopRecording() {
@@ -120,6 +120,7 @@ function insertRecordRow(table, rowData, index) {
   const cellOriAlpha = row.insertCell(4);
   const cellOriBeta = row.insertCell(5);
   const cellOriGamma = row.insertCell(6);
+  const cellTime = row.insertCell(7);
   cellIdx.innerHTML = index;
   cellAccX.innerHTML = rowData.acc_X;
   cellAccY.innerHTML = rowData.acc_Y;
@@ -127,6 +128,7 @@ function insertRecordRow(table, rowData, index) {
   cellOriAlpha.innerHTML = rowData.ori_alpha;
   cellOriBeta.innerHTML = rowData.ori_beta;
   cellOriGamma.innerHTML = rowData.ori_gamma;
+  cellTime.innerHTML = rowData.time;
 }
 
 function deviceOrientationHandler(e) {
