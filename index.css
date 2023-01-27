@@ -18,8 +18,40 @@
 #oriData {
   text-align: center;
   flex: 1;
+  padding: 5px;
+}
+table {
+  margin: 0 auto;
 }
 .dataContent {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+}
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+}
+.start {
+  background-color: #4caf50;
+}
+.stop {
+  background-color: #f44336;
+}
+.access,
+.show {
+  background-color: #008cba;
+}
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

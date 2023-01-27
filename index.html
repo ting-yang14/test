@@ -11,47 +11,74 @@
   </head>
   <body>
     <div id="device"></div>
-    <button id="getAccess" onclick="getAccess()">Get data permissions</button>
+    <div id="recordStatus"></div>
+    <button class="button access" id="getAccess" onclick="getAccess()">
+      Get data permissions
+    </button>
     <div class="deviceData">
       <div id="accData">
         <div class="dataContent">
           <p>Acc X:</p>
           <p id="accX"></p>
-          <p>m/<sup>2</sup></p>
+          <p>m/s<sup>2</sup></p>
         </div>
         <div class="dataContent">
           <p>Acc Y:</p>
           <p id="accY"></p>
-          <p>m/<sup>2</sup></p>
+          <p>m/s<sup>2</sup></p>
         </div>
         <div class="dataContent">
           <p>Acc Z:</p>
           <p id="accZ"></p>
-          <p>m/<sup>2</sup></p>
+          <p>m/s<sup>2</sup></p>
         </div>
       </div>
       <div id="oriData">
         <div class="dataContent">
-          <p>Ori Alpha:</p>
+          <p>Ori &alpha;:</p>
           <p id="oriAlpha"></p>
           <p>deg</p>
         </div>
         <div class="dataContent">
-          <p>Ori Beta:</p>
+          <p>Ori &beta;:</p>
           <p id="oriBeta"></p>
           <p>deg</p>
         </div>
         <div class="dataContent">
-          <p>Ori Gamma:</p>
+          <p>Ori &gamma;:</p>
           <p id="oriGamma"></p>
           <p>deg</p>
         </div>
       </div>
     </div>
-    <button id="startRecordBtn">Start Recording</button>
-    <button id="stopRecordBtn">Stop Recording</button>
-    <button id="showRecordBtn">Show Record</button>
-    <div id="recordedData"></div>
+    <button class="button start" id="startRecordBtn">Start Recording</button>
+    <button class="button stop" id="stopRecordBtn">Stop Recording</button>
+    <button class="button show" id="showRecordBtn">Show Record</button>
+    <div id="recordedData">
+      <table id="recordTable">
+        <caption>
+          Record Data
+        </caption>
+        <tr>
+          <th>idx</th>
+          <th>Acc X</th>
+          <th>Acc Y</th>
+          <th>Acc Z</th>
+          <th>Ori &alpha;</th>
+          <th>Ori &beta;</th>
+          <th>Ori &gamma;</th>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>0.1234</td>
+          <td>0.4432</td>
+          <td>0.2434</td>
+          <td>132.3432</td>
+          <td>42.1344</td>
+          <td>122.4321</td>
+        </tr>
+      </table>
+    </div>
     <script src="./index.js"></script>
   </body>
 </html>

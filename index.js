@@ -1,5 +1,37 @@
 const device = checkDevice();
 showDevice(device);
+const accessBtn = document.getElementById("getAccess");
+pageInit(device);
+let recordingInterval;
+let recordData = [];
+let record = {
+  startTime: null,
+  data: [],
+  endTime: null,
+};
+let currentData = {
+  acc_X: null,
+  acc_Y: null,
+  acc_Z: null,
+  ori_alpha: null,
+  ori_beta: null,
+  ori_gamma: null,
+};
+const recordStatus = document.getElementById("recordStatus");
+const oriAlpha = document.getElementById("oriAlpha");
+const oriBeta = document.getElementById("oriBeta");
+const oriGamma = document.getElementById("oriGamma");
+const accX = document.getElementById("accX");
+const accY = document.getElementById("accY");
+const accZ = document.getElementById("accZ");
+const startRecordBtn = document.getElementById("startRecordBtn");
+const stopRecordBtn = document.getElementById("stopRecordBtn");
+const showRecordBtn = document.getElementById("showRecordBtn");
+
+startRecordBtn.addEventListener("click", startRecording);
+stopRecordBtn.addEventListener("click", stopRecording);
+showRecordBtn.addEventListener("click", showRecordedData);
+
 function checkDevice() {
   const userAgent = navigator.userAgent;
   if (userAgent.indexOf("Android") > -1) {
@@ -14,59 +46,51 @@ function showDevice(device) {
   const deviceDiv = document.getElementById("device");
   deviceDiv.innerHTML = device;
 }
-// const accessBtn = document.getElementById("getAccess");
-pageInit(device);
+
 function pageInit(device) {
   if (device == "Android") {
     window.addEventListener("deviceorientation", deviceOrientationHandler);
     window.addEventListener("devicemotion", deviceMotionHandler);
   }
   if (device == "iPhone") {
-    const accessBtn = document.getElementById("getAccess");
     accessBtn.style.display = "block";
-    // getAccess();
   }
   if (device == "notMobile") {
-    const data = document.querySelector(".data");
+    const data = document.querySelector(".deviceData");
     data.innerHTML = `<p>此裝置不支援動作訊號收取</p>`;
   }
 }
+
 function getAccess() {
   DeviceMotionEvent.requestPermission()
     .then((response) => {
       if (response == "granted") {
         window.addEventListener("deviceorientation", deviceOrientationHandler);
         window.addEventListener("devicemotion", deviceMotionHandler);
+        accessBtn.style.display = "none";
       }
     })
     .catch((err) => {
       console.log(err);
     });
 }
-const startRecordBtn = document.getElementById("startRecordBtn");
-startRecordBtn.addEventListener("click", startRecording);
-const stopRecordBtn = document.getElementById("stopRecordBtn");
-stopRecordBtn.addEventListener("click", stopRecording);
-let recordingInterval;
-let data = [];
-let record = {
-  startTime: null,
-  data: [],
-  endTime: null,
-};
+
 function startRecording() {
   record.startTime = getCurrentISOTime();
   if (!recordingInterval) {
     recordingInterval = setInterval(function () {
-      data.push(mobileData);
+      recordData.push(currentData);
     }, 33.3);
   }
+  recordStatus.textContent = `mobile data is recording`;
 }
 
 function stopRecording() {
   clearInterval(recordingInterval);
   recordingInterval = null;
+  record.data = recordData;
   record.endTime = getCurrentISOTime();
+  recordStatus.textContent = `mobile data stop recording`;
 }
 
 function getCurrentISOTime() {
@@ -74,119 +98,54 @@ function getCurrentISOTime() {
   const nowISOString = now.toISOString();
   return nowISOString;
 }
-const showRecordBtn = document.getElementById("showRecordBtn");
-showRecordBtn.addEventListener("click", showRecordedData);
-function showRecordedData() {
-  const recordedData = document.getElementById("recordedData");
-  recordedData.innerHTML = record;
+
+function showRecordedData(record) {
+  const recordTable = document.getElementById("recordTable");
+  record.data.forEach((rowData, index) => {
+    insertRecordRow(recordTable, rowData, index);
+  });
+  recordTable.style.display = block;
 }
-// if (window.DeviceOrientationEvent) {
-//   alert("裝置支援感測器擷取");
-// } else {
-//   alert("您的浏览器不支持DeviceOrientation！");
-// }
-// (function permission() {
-//   if (location.protocol != "https:") {
-//     location.href =
-//       "https:" +
-//       window.location.href.substring(window.location.protocol.length);
-//   }
-//   let phone = isIosOrAndroid();
-//   if (phone === 2) {
-//     // 仅 ios 需要获取用户允许
-//     if (
-//       typeof window.DeviceMotionEvent !== "undefined" &&
-//       typeof window.DeviceMotionEvent.requestPermission === "function"
-//     ) {
-//       window.DeviceMotionEvent.requestPermission()
-//         .then((response) => {
-//           if (response == "granted") {
-//             let body = document.querySelector(".iphone");
-//             body.innerHTML = navigator.userAgent + "aaas";
-//             console.log("request");
-//           }
-//         })
-//         .catch(console.error);
-//     } else {
-//       alert("DeviceMotionEvent is not defined");
-//     }
-//   } else {
-//     let body = document.querySelector(".iphone");
-//     body.innerHTML = navigator.userAgent + "ffff";
-//     console.log("request++++");
-//   }
-// })();
 
-// function isIosOrAndroid() {
-//   const u = navigator.userAgent;
-//   console.log(u);
-//   const isAndroid = u.indexOf("Android") > -1 || u.indexOf("Adr") > -1; //android终端
-//   if (isAndroid) {
-//     console.log("return 1");
-//     return 1;
-//   }
-//   // const isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-//   const isiOS = u.includes("Mac");
-//   console.log(isiOS);
-//   if (isiOS) {
-//     console.log("return 2");
-//     return 2;
-//   }
-//   console.log("return 0");
-//   return 0;
-// }
+function insertRecordRow(table, rowData, index) {
+  const row = table.insertRow(-1);
+  const cellIdx = row.insertCell(0);
+  const cellAccX = row.insertCell(1);
+  const cellAccY = row.insertCell(2);
+  const cellAccZ = row.insertCell(3);
+  const cellOriAlpha = row.insertCell(4);
+  const cellOriBeta = row.insertCell(5);
+  const cellOriGamma = row.insertCell(6);
+  cellIdx.innerHTML = index;
+  cellAccX.innerHTML = rowData.acc_X;
+  cellAccY.innerHTML = rowData.acc_Y;
+  cellAccZ.innerHTML = rowData.acc_Z;
+  cellOriAlpha.innerHTML = rowData.ori_alpha;
+  cellOriBeta.innerHTML = rowData.ori_beta;
+  cellOriGamma.innerHTML = rowData.ori_gamma;
+}
 
-// function $(id) {
-//   return document.getElementById(id);
-// }
-let mobileData = {
-  acc_X: null,
-  acc_Y: null,
-  acc_Z: null,
-  ori_alpha: null,
-  ori_beta: null,
-  ori_gamma: null,
-};
-const oriAlpha = document.getElementById("oriAlpha");
-const oriBeta = document.getElementById("oriBeta");
-const oriGamma = document.getElementById("oriGamma");
 function deviceOrientationHandler(e) {
   const roundAlpha = Math.round(e.alpha * 10000) / 10000;
   const roundBeta = Math.round(e.beta * 10000) / 10000;
   const roundGamma = Math.round(e.gamma * 10000) / 10000;
-  mobileData.ori_alpha = roundAlpha;
-  mobileData.ori_beta = roundBeta;
-  mobileData.ori_gamma = roundGamma;
+  currentData.ori_alpha = roundAlpha;
+  currentData.ori_beta = roundBeta;
+  currentData.ori_gamma = roundGamma;
   oriAlpha.textContent = roundAlpha;
   oriBeta.textContent = roundBeta;
   oriGamma.textContent = roundGamma;
 }
-const accX = document.getElementById("accX");
-const accY = document.getElementById("accY");
-const accZ = document.getElementById("accZ");
+
 function deviceMotionHandler(e) {
   const { x, y, z } = e.acceleration;
   const roundX = Math.round(x * 10000) / 10000;
   const roundY = Math.round(y * 10000) / 10000;
   const roundZ = Math.round(z * 10000) / 10000;
-  mobileData.acc_X = roundX;
-  mobileData.acc_Y = roundY;
-  mobileData.acc_Z = roundZ;
+  currentData.acc_X = roundX;
+  currentData.acc_Y = roundY;
+  currentData.acc_Z = roundZ;
   accX.textContent = roundX;
   accY.textContent = roundY;
   accZ.textContent = roundZ;
 }
-// // 获得陀螺仪相关信息
-// function DeviceOrientationHandler(e) {
-//   const a = `<p>alpha: ${e.alpha}</p>`;
-//   const b = `<p>beta: ${e.beta}</p>`;
-//   const g = `<p>gamma: ${e.gamma}</p>`;
-//   const abs = `<p>absolute: ${e.absolute}</p>`;
-//   $("show-info").innerHTML = a + b + g + abs;
-
-//   const style = `
-//       -webkit-transform:rotateX(${e.beta}deg) rotateY(${e.gamma}deg) rotateZ(${e.alpha}deg);
-//       transform:rotateX(${e.beta}deg) rotateY(${e.gamma}deg) rotateZ(${e.alpha}deg);
-//     `;
-//   $("container").setAttribute("style", style);
-// }
