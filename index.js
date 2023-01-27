@@ -9,15 +9,15 @@ let record = {
   data: [],
   endTime: null,
 };
-let currentData = {
-  acc_X: null,
-  acc_Y: null,
-  acc_Z: null,
-  ori_alpha: null,
-  ori_beta: null,
-  ori_gamma: null,
-  time: null,
-};
+// let currentData = {
+//   acc_X: null,
+//   acc_Y: null,
+//   acc_Z: null,
+//   ori_alpha: null,
+//   ori_beta: null,
+//   ori_gamma: null,
+//   time: null,
+// };
 const recordStatus = document.getElementById("recordStatus");
 const oriAlpha = document.getElementById("oriAlpha");
 const oriBeta = document.getElementById("oriBeta");
@@ -85,15 +85,26 @@ function startRecording() {
 }
 
 function saveCurrentData() {
-  const data = currentData;
-  data.time = Date.now();
-  recordData.push(data);
+  const currentData = {};
+  currentData.acc_X = accX.textContent;
+  currentData.acc_Y = accY.textContent;
+  currentData.acc_Z = accZ.textContent;
+  currentData.ori_alpha = oriAlpha.textContent;
+  currentData.ori_beta = oriBeta.textContent;
+  currentData.ori_gamma = oriGamma.textContent;
+  currentData.time = Date.now();
+  recordData.push(currentData);
 }
+const recordStart = document.getElementById("recordStart");
+const recordEnd = document.getElementById("recordEnd");
+
 function stopRecording() {
   clearInterval(recordingInterval);
   recordingInterval = null;
   record.data = recordData;
   record.endTime = getCurrentISOTime();
+  recordStart.textContent = `Start at ${record.startTime}`;
+  recordEnd.textContent = `End at ${record.endTime}`;
   recordStatus.textContent = `mobile data stop recording`;
 }
 
@@ -135,9 +146,7 @@ function deviceOrientationHandler(e) {
   const roundAlpha = Math.round(e.alpha * 10000) / 10000;
   const roundBeta = Math.round(e.beta * 10000) / 10000;
   const roundGamma = Math.round(e.gamma * 10000) / 10000;
-  currentData.ori_alpha = roundAlpha;
-  currentData.ori_beta = roundBeta;
-  currentData.ori_gamma = roundGamma;
+
   oriAlpha.textContent = roundAlpha;
   oriBeta.textContent = roundBeta;
   oriGamma.textContent = roundGamma;
@@ -148,9 +157,7 @@ function deviceMotionHandler(e) {
   const roundX = Math.round(x * 10000) / 10000;
   const roundY = Math.round(y * 10000) / 10000;
   const roundZ = Math.round(z * 10000) / 10000;
-  currentData.acc_X = roundX;
-  currentData.acc_Y = roundY;
-  currentData.acc_Z = roundZ;
+
   accX.textContent = roundX;
   accY.textContent = roundY;
   accZ.textContent = roundZ;

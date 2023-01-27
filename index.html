@@ -10,11 +10,16 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <div id="device"></div>
-    <div id="recordStatus"></div>
-    <button class="button access" id="getAccess" onclick="getAccess()">
-      Get data permissions
-    </button>
+    <div class="record-container">
+      <div id="device"></div>
+      <div id="recordStatus"></div>
+      <div id="recordStart"></div>
+      <div id="recordEnd"></div>
+      <button class="button access" id="getAccess" onclick="getAccess()">
+        Get data permissions
+      </button>
+    </div>
+
     <div class="deviceData">
       <div id="accData">
         <div class="dataContent">
@@ -69,6 +74,7 @@
         <th>Ori &alpha;</th>
         <th>Ori &beta;</th>
         <th>Ori &gamma;</th>
+        <th>time</th>
       </tr>
       <tr>
         <td>0</td>
@@ -78,6 +84,7 @@
         <td>132.3432</td>
         <td>42.1344</td>
         <td>122.4321</td>
+        <td>1674826311180</td>
       </tr>
     </table>
 

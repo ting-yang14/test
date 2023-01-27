@@ -2,7 +2,7 @@
   margin: 0;
   box-sizing: border-box;
 }
-#device {
+.record-container {
   text-align: center;
   padding: 10px;
 }
@@ -11,9 +11,9 @@
   display: flex;
   justify-content: center;
 }
-#getAccess {
+/* #getAccess {
   display: none;
-}
+} */
 #accData,
 #oriData {
   text-align: center;
@@ -48,7 +48,12 @@
 .stop {
   background-color: #f44336;
 }
-.access,
+.access {
+  margin: auto;
+  display: none;
+  background-color: #e7e7e7;
+  color: black;
+}
 .show {
   background-color: #008cba;
 }
