@@ -104,7 +104,7 @@ function showRecordedData(record) {
   record.data.forEach((rowData, index) => {
     insertRecordRow(recordTable, rowData, index);
   });
-  recordTable.style.display = block;
+  recordTable.style.display = "block";
 }
 
 function insertRecordRow(table, rowData, index) {
