@@ -51,34 +51,36 @@
         </div>
       </div>
     </div>
-    <button class="button start" id="startRecordBtn">Start Recording</button>
-    <button class="button stop" id="stopRecordBtn">Stop Recording</button>
-    <button class="button show" id="showRecordBtn">Show Record</button>
-    <div>
-      <table id="recordTable">
-        <caption>
-          Record Data
-        </caption>
-        <tr>
-          <th>idx</th>
-          <th>Acc X</th>
-          <th>Acc Y</th>
-          <th>Acc Z</th>
-          <th>Ori &alpha;</th>
-          <th>Ori &beta;</th>
-          <th>Ori &gamma;</th>
-        </tr>
-        <tr>
-          <td>0</td>
-          <td>0.1234</td>
-          <td>0.4432</td>
-          <td>0.2434</td>
-          <td>132.3432</td>
-          <td>42.1344</td>
-          <td>122.4321</td>
-        </tr>
-      </table>
+    <div class="button-container">
+      <button class="button start" id="startRecordBtn">Start Recording</button>
+      <button class="button stop" id="stopRecordBtn">Stop Recording</button>
+      <button class="button show" id="showRecordBtn">Show Record</button>
     </div>
+
+    <table id="recordTable">
+      <caption>
+        Record Data
+      </caption>
+      <tr>
+        <th>idx</th>
+        <th>Acc X</th>
+        <th>Acc Y</th>
+        <th>Acc Z</th>
+        <th>Ori &alpha;</th>
+        <th>Ori &beta;</th>
+        <th>Ori &gamma;</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>0.1234</td>
+        <td>0.4432</td>
+        <td>0.2434</td>
+        <td>132.3432</td>
+        <td>42.1344</td>
+        <td>122.4321</td>
+      </tr>
+    </table>
+
     <script src="./index.js"></script>
   </body>
 </html>

@@ -16,6 +16,7 @@ let currentData = {
   ori_alpha: null,
   ori_beta: null,
   ori_gamma: null,
+  time: null,
 };
 const recordStatus = document.getElementById("recordStatus");
 const oriAlpha = document.getElementById("oriAlpha");
@@ -78,13 +79,16 @@ function getAccess() {
 function startRecording() {
   record.startTime = getCurrentISOTime();
   if (!recordingInterval) {
-    recordingInterval = setInterval(function () {
-      recordData.push(currentData);
-    }, 33.3);
+    recordingInterval = setInterval(saveCurrentData, 33.3);
   }
   recordStatus.textContent = `mobile data is recording`;
 }
 
+function saveCurrentData() {
+  data = currentData;
+  currentData.time = Date.now();
+  recordData.push(data);
+}
 function stopRecording() {
   clearInterval(recordingInterval);
   recordingInterval = null;
