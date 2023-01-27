@@ -30,7 +30,7 @@ const showRecordBtn = document.getElementById("showRecordBtn");
 
 startRecordBtn.addEventListener("click", startRecording);
 stopRecordBtn.addEventListener("click", stopRecording);
-showRecordBtn.addEventListener("click", showRecordedData);
+showRecordBtn.addEventListener("click", showRecordedData.bind(null, record));
 
 function checkDevice() {
   const userAgent = navigator.userAgent;
