@@ -22,6 +22,7 @@ const stopRecordBtn = document.getElementById("stopRecordBtn");
 const showRecordBtn = document.getElementById("showRecordBtn");
 const recordStart = document.getElementById("recordStart");
 const recordEnd = document.getElementById("recordEnd");
+const recordContainer = document.querySelector(".record-container");
 
 startRecordBtn.addEventListener("click", startRecording);
 stopRecordBtn.addEventListener("click", stopRecording);
@@ -79,6 +80,7 @@ function startRecording() {
   recordStatus.textContent = `mobile data is recording`;
   startRecordBtn.classList.toggle("disabled");
   stopRecordBtn.classList.toggle("disabled");
+  recordContainer.style.display = "none";
 }
 
 function saveCurrentData() {
@@ -115,7 +117,7 @@ function showRecordedData(record) {
   const recordTable = document.getElementById("recordTable");
   clearRecord(recordTable);
   appendRecord(recordTable, record);
-  recordTable.style.display = "block";
+  recordContainer.style.display = "block";
 }
 
 function clearRecord(table) {

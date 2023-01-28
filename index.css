@@ -4,28 +4,32 @@
 }
 .record-container {
   text-align: center;
-  padding: 10px;
+  display: none;
+  width: 90%;
+  margin: 0 auto;
 }
 .deviceData {
   padding: 10px;
   display: flex;
   justify-content: center;
 }
-/* #getAccess {
-  display: none;
-} */
+#device,
+#recordStatus {
+  text-align: center;
+}
 #accData,
 #oriData {
   text-align: center;
   flex: 1;
   padding: 5px;
 }
-#recordTable {
+table {
+  display: block;
   margin: 0 auto;
-  display: none;
   overflow-x: auto;
   white-space: nowrap;
   border-collapse: collapse;
+  height: 250px;
 }
 th,
 td {

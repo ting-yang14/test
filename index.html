@@ -10,16 +10,10 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <div class="record-container">
-      <div id="device"></div>
-      <div id="recordStatus"></div>
-      <div id="recordStart"></div>
-      <div id="recordEnd"></div>
-      <button class="button access" id="getAccess" onclick="getAccess()">
-        Get data permissions
-      </button>
-    </div>
-
+    <div id="device"></div>
+    <button class="button access" id="getAccess" onclick="getAccess()">
+      Get access permissions
+    </button>
     <div class="deviceData">
       <div id="accData">
         <div class="dataContent">
@@ -63,33 +57,24 @@
       </button>
       <button class="button show" id="showRecordBtn">Show Record</button>
     </div>
-
-    <table id="recordTable">
-      <caption>
-        Record Data
-      </caption>
-      <tr>
-        <th>idx</th>
-        <th>Acc X</th>
-        <th>Acc Y</th>
-        <th>Acc Z</th>
-        <th>Ori &alpha;</th>
-        <th>Ori &beta;</th>
-        <th>Ori &gamma;</th>
-        <th>time</th>
-      </tr>
-      <tr>
-        <td>0</td>
-        <td>0.1234</td>
-        <td>0.4432</td>
-        <td>0.2434</td>
-        <td>132.3432</td>
-        <td>42.1344</td>
-        <td>122.4321</td>
-        <td>1674826311180</td>
-      </tr>
-    </table>
-
+    <h2 id="recordStatus"></h2>
+    <div class="record-container">
+      <div id="recordStart"></div>
+      <div id="recordEnd"></div>
+      <h3>Record Data</h3>
+      <table id="recordTable">
+        <tr>
+          <th>idx</th>
+          <th>Acc X</th>
+          <th>Acc Y</th>
+          <th>Acc Z</th>
+          <th>Ori &alpha;</th>
+          <th>Ori &beta;</th>
+          <th>Ori &gamma;</th>
+          <th>time</th>
+        </tr>
+      </table>
+    </div>
     <script src="./index.js"></script>
   </body>
 </html>
