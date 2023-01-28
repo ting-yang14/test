@@ -9,15 +9,7 @@ let record = {
   data: [],
   endTime: null,
 };
-// let currentData = {
-//   acc_X: null,
-//   acc_Y: null,
-//   acc_Z: null,
-//   ori_alpha: null,
-//   ori_beta: null,
-//   ori_gamma: null,
-//   time: null,
-// };
+
 const recordStatus = document.getElementById("recordStatus");
 const oriAlpha = document.getElementById("oriAlpha");
 const oriBeta = document.getElementById("oriBeta");
@@ -28,6 +20,8 @@ const accZ = document.getElementById("accZ");
 const startRecordBtn = document.getElementById("startRecordBtn");
 const stopRecordBtn = document.getElementById("stopRecordBtn");
 const showRecordBtn = document.getElementById("showRecordBtn");
+const recordStart = document.getElementById("recordStart");
+const recordEnd = document.getElementById("recordEnd");
 
 startRecordBtn.addEventListener("click", startRecording);
 stopRecordBtn.addEventListener("click", stopRecording);
@@ -77,11 +71,14 @@ function getAccess() {
 }
 
 function startRecording() {
+  recordData = [];
   record.startTime = getCurrentISOTime();
   if (!recordingInterval) {
     recordingInterval = setInterval(saveCurrentData, 33.3);
   }
   recordStatus.textContent = `mobile data is recording`;
+  startRecordBtn.classList.toggle("disabled");
+  stopRecordBtn.classList.toggle("disabled");
 }
 
 function saveCurrentData() {
@@ -95,8 +92,6 @@ function saveCurrentData() {
   currentData.time = Date.now();
   recordData.push(currentData);
 }
-const recordStart = document.getElementById("recordStart");
-const recordEnd = document.getElementById("recordEnd");
 
 function stopRecording() {
   clearInterval(recordingInterval);
@@ -106,6 +101,8 @@ function stopRecording() {
   recordStart.textContent = `Start at ${record.startTime}`;
   recordEnd.textContent = `End at ${record.endTime}`;
   recordStatus.textContent = `mobile data stop recording`;
+  startRecordBtn.classList.toggle("disabled");
+  stopRecordBtn.classList.toggle("disabled");
 }
 
 function getCurrentISOTime() {
@@ -116,13 +113,25 @@ function getCurrentISOTime() {
 
 function showRecordedData(record) {
   const recordTable = document.getElementById("recordTable");
-  record.data.forEach((rowData, index) => {
-    insertRecordRow(recordTable, rowData, index);
-  });
+  clearRecord(recordTable);
+  appendRecord(recordTable, record);
   recordTable.style.display = "block";
 }
 
-function insertRecordRow(table, rowData, index) {
+function clearRecord(table) {
+  const rowCounts = table.rows.length;
+  for (let i = 0; i < rowCounts - 1; i++) {
+    table.deleteRow(-1);
+  }
+}
+
+function appendRecord(table, record) {
+  record.data.forEach((rowData, index) => {
+    insertRow(table, rowData, index);
+  });
+}
+
+function insertRow(table, rowData, index) {
   const row = table.insertRow(-1);
   const cellIdx = row.insertCell(0);
   const cellAccX = row.insertCell(1);
@@ -146,7 +155,6 @@ function deviceOrientationHandler(e) {
   const roundAlpha = Math.round(e.alpha * 10000) / 10000;
   const roundBeta = Math.round(e.beta * 10000) / 10000;
   const roundGamma = Math.round(e.gamma * 10000) / 10000;
-
   oriAlpha.textContent = roundAlpha;
   oriBeta.textContent = roundBeta;
   oriGamma.textContent = roundGamma;
@@ -157,7 +165,6 @@ function deviceMotionHandler(e) {
   const roundX = Math.round(x * 10000) / 10000;
   const roundY = Math.round(y * 10000) / 10000;
   const roundZ = Math.round(z * 10000) / 10000;
-
   accX.textContent = roundX;
   accY.textContent = roundY;
   accZ.textContent = roundZ;

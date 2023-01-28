@@ -23,6 +23,18 @@
 #recordTable {
   margin: 0 auto;
   display: none;
+  overflow-x: auto;
+  white-space: nowrap;
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid #f2f2f2;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 .dataContent {
   display: flex;
