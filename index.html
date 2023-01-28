@@ -10,52 +10,57 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <div id="device"></div>
-    <button class="button access" id="getAccess" onclick="getAccess()">
-      Get access permissions
-    </button>
-    <div class="deviceData">
-      <div id="accData">
-        <div class="dataContent">
-          <p>Acc X:</p>
-          <p id="accX"></p>
-          <p>m/s<sup>2</sup></p>
-        </div>
-        <div class="dataContent">
-          <p>Acc Y:</p>
-          <p id="accY"></p>
-          <p>m/s<sup>2</sup></p>
-        </div>
-        <div class="dataContent">
-          <p>Acc Z:</p>
-          <p id="accZ"></p>
-          <p>m/s<sup>2</sup></p>
-        </div>
-      </div>
-      <div id="oriData">
-        <div class="dataContent">
-          <p>Ori &alpha;:</p>
-          <p id="oriAlpha"></p>
-          <p>deg</p>
-        </div>
-        <div class="dataContent">
-          <p>Ori &beta;:</p>
-          <p id="oriBeta"></p>
-          <p>deg</p>
-        </div>
-        <div class="dataContent">
-          <p>Ori &gamma;:</p>
-          <p id="oriGamma"></p>
-          <p>deg</p>
-        </div>
-      </div>
-    </div>
-    <div class="button-container">
-      <button class="button start" id="startRecordBtn">Start Recording</button>
-      <button class="button stop disabled" id="stopRecordBtn">
-        Stop Recording
+    <div>
+      <div id="device"></div>
+      <button class="button access" id="getAccess" onclick="getAccess()">
+        Get access permissions
       </button>
-      <button class="button show" id="showRecordBtn">Show Record</button>
+      <div class="deviceData">
+        <div id="accData">
+          <div class="dataContent">
+            <p>Acc X:</p>
+            <p id="accX"></p>
+            <p>m/s<sup>2</sup></p>
+          </div>
+          <div class="dataContent">
+            <p>Acc Y:</p>
+            <p id="accY"></p>
+            <p>m/s<sup>2</sup></p>
+          </div>
+          <div class="dataContent">
+            <p>Acc Z:</p>
+            <p id="accZ"></p>
+            <p>m/s<sup>2</sup></p>
+          </div>
+        </div>
+        <div id="oriData">
+          <div class="dataContent">
+            <p>Ori &alpha;:</p>
+            <p id="oriAlpha"></p>
+            <p>deg</p>
+          </div>
+          <div class="dataContent">
+            <p>Ori &beta;:</p>
+            <p id="oriBeta"></p>
+            <p>deg</p>
+          </div>
+          <div class="dataContent">
+            <p>Ori &gamma;:</p>
+            <p id="oriGamma"></p>
+            <p>deg</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button class="button start" id="startRecordBtn">
+          Start Recording
+        </button>
+        <button class="button stop disabled" id="stopRecordBtn">
+          Stop Recording
+        </button>
+        <button class="button show" id="showRecordBtn">Show Record</button>
+      </div>
     </div>
     <h2 id="recordStatus"></h2>
     <div class="record-container">

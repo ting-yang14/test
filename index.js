@@ -81,6 +81,8 @@ function startRecording() {
   startRecordBtn.classList.toggle("disabled");
   stopRecordBtn.classList.toggle("disabled");
   recordContainer.style.display = "none";
+  startRecordBtn.disabled = true;
+  stopRecordBtn.disabled = false;
 }
 
 function saveCurrentData() {
@@ -105,6 +107,8 @@ function stopRecording() {
   recordStatus.textContent = `mobile data stop recording`;
   startRecordBtn.classList.toggle("disabled");
   stopRecordBtn.classList.toggle("disabled");
+  startRecordBtn.disabled = false;
+  stopRecordBtn.disabled = true;
 }
 
 function getCurrentISOTime() {
